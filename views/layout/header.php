@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tienda de Camisetas</title>
-    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="<?=BASE_URL?>assets/css/styles.css" />
 </head>
 
 <body>
@@ -14,8 +14,8 @@
         <!--CABECERA-->
         <header id="header">
             <div id="logo">
-                <img src="assets/img/camiseta.png" alt="Camiseta Logo" />
-                <a href="index.php">
+                <img src="<?=BASE_URL?>assets/img/camiseta.png" alt="Camiseta Logo" />
+                <a href="<?=BASE_URL?>index.php">
                     Tienda de camisetas
                 </a>
             </div>
