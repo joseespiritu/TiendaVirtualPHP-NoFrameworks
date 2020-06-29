@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-06-2020 a las 14:46:21
+-- Tiempo de generación: 29-06-2020 a las 15:00:08
 -- Versión del servidor: 10.3.16-MariaDB
 -- Versión de PHP: 7.3.7
 
@@ -93,6 +93,13 @@ CREATE TABLE `productos` (
   `fecha` date NOT NULL,
   `imagen` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`id`, `categoria_id`, `nombre`, `descripcion`, `precio`, `stock`, `oferta`, `fecha`, `imagen`) VALUES
+(1, 1, 'Box logo supreme', 'Box logo supreme dd', 100.00, 20, NULL, '2020-06-29', NULL);
 
 -- --------------------------------------------------------
 
@@ -188,7 +195,7 @@ ALTER TABLE `pedidos`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
