@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 28-06-2020 a las 22:42:03
--- Versión del servidor: 5.7.26
--- Versión de PHP: 7.3.5
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 29-06-2020 a las 14:46:21
+-- Versión del servidor: 10.3.16-MariaDB
+-- Versión de PHP: 7.3.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,12 +28,10 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `categorias`
 --
 
-DROP TABLE IF EXISTS `categorias`;
-CREATE TABLE IF NOT EXISTS `categorias` (
-  `id` int(255) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+CREATE TABLE `categorias` (
+  `id` int(255) NOT NULL,
+  `nombre` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `categorias`
@@ -43,7 +41,10 @@ INSERT INTO `categorias` (`id`, `nombre`) VALUES
 (1, 'Manga corta'),
 (2, 'Tirantes'),
 (3, 'Manga Larga'),
-(4, 'Sudaderas');
+(4, 'Sudaderas'),
+(5, 'Lucha Libre'),
+(6, 'Gorras'),
+(7, 'Chaquetas');
 
 -- --------------------------------------------------------
 
@@ -51,14 +52,10 @@ INSERT INTO `categorias` (`id`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `lineas_pedidos`
 --
 
-DROP TABLE IF EXISTS `lineas_pedidos`;
-CREATE TABLE IF NOT EXISTS `lineas_pedidos` (
-  `id` int(255) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `lineas_pedidos` (
+  `id` int(255) NOT NULL,
   `pedido_id` int(255) NOT NULL,
-  `producto_id` int(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_linea_pedido` (`pedido_id`),
-  KEY `fk_linea_producto` (`producto_id`)
+  `producto_id` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -67,9 +64,8 @@ CREATE TABLE IF NOT EXISTS `lineas_pedidos` (
 -- Estructura de tabla para la tabla `pedidos`
 --
 
-DROP TABLE IF EXISTS `pedidos`;
-CREATE TABLE IF NOT EXISTS `pedidos` (
-  `id` int(255) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `pedidos` (
+  `id` int(255) NOT NULL,
   `usuario_id` int(255) NOT NULL,
   `provincia` varchar(100) NOT NULL,
   `localidad` varchar(100) NOT NULL,
@@ -77,9 +73,7 @@ CREATE TABLE IF NOT EXISTS `pedidos` (
   `coste` float(200,2) NOT NULL,
   `estado` varchar(20) NOT NULL,
   `fecha` date DEFAULT NULL,
-  `hora` time DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_pedido_usuario` (`usuario_id`)
+  `hora` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -88,19 +82,16 @@ CREATE TABLE IF NOT EXISTS `pedidos` (
 -- Estructura de tabla para la tabla `productos`
 --
 
-DROP TABLE IF EXISTS `productos`;
-CREATE TABLE IF NOT EXISTS `productos` (
-  `id` int(255) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `productos` (
+  `id` int(255) NOT NULL,
   `categoria_id` int(255) NOT NULL,
   `nombre` varchar(100) NOT NULL,
-  `descripcion` text,
+  `descripcion` text DEFAULT NULL,
   `precio` float(100,2) NOT NULL,
   `stock` int(255) NOT NULL,
   `oferta` varchar(2) DEFAULT NULL,
   `fecha` date NOT NULL,
-  `imagen` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_producto_categoria` (`categoria_id`)
+  `imagen` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -109,18 +100,15 @@ CREATE TABLE IF NOT EXISTS `productos` (
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
-CREATE TABLE IF NOT EXISTS `usuarios` (
-  `id` int(255) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `usuarios` (
+  `id` int(255) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `apellidos` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `rol` varchar(20) DEFAULT NULL,
-  `imagen` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uq_email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  `imagen` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -132,7 +120,81 @@ INSERT INTO `usuarios` (`id`, `nombre`, `apellidos`, `email`, `password`, `rol`,
 (3, 'dewdwe', 'dew', 'dew@cds.c', '$2y$04$YlCB4MlN9qqz0mNq5Kb0gebulF.zLpauV6JLTz7xFZykUOWLriwDa', 'user', 'null'),
 (4, 'frefre', 'fref', 'MAIL@mail.com', '$2y$04$z02oa9AD40s96CJxkPQpnu1L1g2J/aKUyueW/qu/hjp7q6IliOdk.', 'user', 'null'),
 (5, 'fregfe', 'fergf', 'mai@mvre.com', '$2y$04$Qs4WuJXpZcZmdN8P90kk2ufBTNaoXHHACUyOzfdq1C1Q.zqPbLvYa', 'user', 'null'),
-(6, 'juan', 'lopez', 'juan@juan.com', '$2y$04$GJ/BTXlGYEgVdQbVih1XEuu8reegU5vLGooNkPVK8Vlf4uBGi24/q', 'admin', 'null');
+(6, 'juan', 'lopez', 'juan@juan.com', '$2y$04$GJ/BTXlGYEgVdQbVih1XEuu8reegU5vLGooNkPVK8Vlf4uBGi24/q', 'admin', 'null'),
+(7, 'paco', 'paco', 'paco@paco.com', '$2y$04$FeHjYkO99xA07UpzqQ1m/OUpvAB3uNnlBvvxSpRxh0cC1VD3KsIfW', 'user', 'null');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `lineas_pedidos`
+--
+ALTER TABLE `lineas_pedidos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_linea_pedido` (`pedido_id`),
+  ADD KEY `fk_linea_producto` (`producto_id`);
+
+--
+-- Indices de la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_pedido_usuario` (`usuario_id`);
+
+--
+-- Indices de la tabla `productos`
+--
+ALTER TABLE `productos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_producto_categoria` (`categoria_id`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uq_email` (`email`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `lineas_pedidos`
+--
+ALTER TABLE `lineas_pedidos`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `productos`
+--
+ALTER TABLE `productos`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restricciones para tablas volcadas
