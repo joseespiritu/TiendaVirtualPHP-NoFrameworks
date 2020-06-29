@@ -1,5 +1,5 @@
 CREATE DATABASE tienda_php_poo;
-USE tienda_master;
+USE tienda_php_poo;
 
 
 CREATE TABLE usuarios(
