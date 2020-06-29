@@ -30,6 +30,17 @@ a:hover {
     color: red;
 }
 
+table {
+    text-align: center;
+    width: 100%;
+    border: 1px solid #555555;
+}
+
+td {
+    border-top: 1px solid #cccccc;
+    padding: 2px;
+}
+
 
 /* CONTAINER */
 
@@ -225,6 +236,12 @@ button,
     background: #33ae3d;
     color: white !important;
     text-decoration: none;
+}
+
+.button-small {
+    width: 120px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 label,
