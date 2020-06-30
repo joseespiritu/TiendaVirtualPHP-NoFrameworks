@@ -2,7 +2,7 @@
 
 <div class="form-container">
 
-    <form action="<?= BASE_URL ?>producto/save" method="POST">
+    <form action="<?= BASE_URL ?>producto/save" method="POST" enctype="multipart/form-data">
         <label for="nombre">Nombre</label>
         <input type="text" name="nombre" />
 
