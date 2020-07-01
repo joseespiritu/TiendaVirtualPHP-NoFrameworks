@@ -309,6 +309,15 @@ button {
     text-align: center;
 }
 
+.product a {
+    color: black;
+    text-decoration: none;
+}
+
+.product a:hover {
+    color: #555555;
+}
+
 .product img {
     height: 170px;
     margin-bottom: 10px;
