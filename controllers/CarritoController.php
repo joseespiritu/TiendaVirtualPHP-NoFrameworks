@@ -16,13 +16,22 @@ class carritoController {
         }
 
         if(isset($_SESSION['carrito'])){
+            $counter = 0;
+            foreach($_SESSION['carrito'] as $indice => $elemento){  
+                if($elemento['id_producto'] == $producto_id){
+                    $_SESSION['carrito'][$indice]['unidades']++;
+                    $counter++;
+                }
+            }
+        } 
 
-        } else {
+        if(!isset($counter) || $counter == 0){
             // Conseguir producto
             $producto = new Producto();
             $producto->setId($producto_id);
             $producto = $producto->getOne();
 
+            // Añadir al carrito
             if(is_object($producto)){
                 $_SESSION['carrito'][] = array(
                     "id_producto" => $producto->id,
@@ -31,8 +40,8 @@ class carritoController {
                     "producto" => $producto
                 );
             }
-            
         }
+        
         header("Location:".BASE_URL."carrito/index");
     }
 
@@ -45,5 +54,3 @@ class carritoController {
         header("Location:".BASE_URL."carrito/index");
     }
 }
-
-?>
