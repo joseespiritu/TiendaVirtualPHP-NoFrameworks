@@ -2,7 +2,7 @@
 
 class pedidoController {
     public function index(){
-        echo "Controlador Pedidos, Acción index";
+        require_once 'views/pedido/hacer.php';
     }
 
     public function add(){
