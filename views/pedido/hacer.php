@@ -8,8 +8,8 @@
     <form action="<?= BASE_URL . 'pedido/add' ?>" method="POST">
         <label for="provincia">Provincia</label>
         <input type="text" name="provincia" require/>
-        <label for="ciudad">Cuidad</label>
-        <input type="text" name="ciudad" require/>
+        <label for="localidad">Cuidad</label>
+        <input type="text" name="localidad" require/>
         <label for="direccion">Direccion</label>
         <input type="text" name="direccion" require/>
 
