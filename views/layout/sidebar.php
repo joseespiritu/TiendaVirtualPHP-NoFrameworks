@@ -33,7 +33,7 @@
             <?php endif; ?>
 
             <?php if(isset($_SESSION['identity'])): ?>
-                <li><a href="#">Mis pedidos</a></li>
+                <li><a href="<?=BASE_URL?>pedido/mis_pedidos">Mis pedidos</a></li>
                 <li><a href="<?=BASE_URL?>usuario/logout">Cerrar Sesión</a></li>
             <?php else: ?>
                 <li><a href="<?=BASE_URL?>usuario/registro">Registrate Aqui</a></li>
