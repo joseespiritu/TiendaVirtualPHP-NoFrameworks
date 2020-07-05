@@ -1,39 +1,50 @@
 <h1>Carrito de la compra</h1>
 
-<table>
-    <tr>
-        <th>Imagen</th>
-        <th>Nombre</th>
-        <th>Precio</th>
-        <th>Unidades</th>
-    </tr>
-    <?php foreach ($carrito as $indice => $elemento) :
-        $producto = $elemento['producto'];
-    ?>
+<?php if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) >= 1) : ?>
+    <table>
         <tr>
-            <td>
-                <?php if ($producto->imagen != null) : ?>
-                    <img src="<?= BASE_URL ?>uploads/images/<?= $producto->imagen ?>" alt="producto" class="img_Carrito"/>
-                <?php else : ?>
-                    <img src="<?= BASE_URL ?>assets/img/camiseta.png" alt="producto" class="img_Carrito"/>
-                <?php endif; ?>
-            </td>
-            <td>
-                <a href="<?=BASE_URL?>producto/ver&id=<?=$producto->id?>"><?=$producto->nombre?></a>
-            </td>
-            <td>
-                <?=$producto->precio?>
-            </td>
-            <td>
-                <?=$elemento['unidades']?>
-            </td>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Unidades</th>
+            <th>Eliminar</th>
         </tr>
-    <?php endforeach; ?>
-</table>
-<br/>
+        <?php foreach ($carrito as $indice => $elemento) :
+            $producto = $elemento['producto'];
+        ?>
+            <tr>
+                <td>
+                    <?php if ($producto->imagen != null) : ?>
+                        <img src="<?= BASE_URL ?>uploads/images/<?= $producto->imagen ?>" alt="producto" class="img_Carrito" />
+                    <?php else : ?>
+                        <img src="<?= BASE_URL ?>assets/img/camiseta.png" alt="producto" class="img_Carrito" />
+                    <?php endif; ?>
+                </td>
+                <td>
+                    <a href="<?= BASE_URL ?>producto/ver&id=<?= $producto->id ?>"><?= $producto->nombre ?></a>
+                </td>
+                <td>
+                    <?= $producto->precio ?>
+                </td>
+                <td>
+                    <?= $elemento['unidades'] ?>
+                </td>
+                <td>
+                    <a href="<?= BASE_URL ?>carrito/remove&index=<?=$indice?>" class="button button-carrito button-red">Quitar producto</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+    <br />
+    <div class="delete-carrito">
+        <a href="<?= BASE_URL ?>carrito/delete_all" class="button button-delete button-red">Vaciar carrito</a>
+    </div>
+    <div class="total-carrito">
+        <?php $stats = Utils::statsCarrito(); ?>
+        <h3>Precio Total: $<?= $stats['total'] ?></h3>
+        <a href="<?= BASE_URL ?>pedido/index" class="button button-pedido">Hacer pedido</a>
+    </div>
 
-<div class="total-carrito">
-    <?php $stats = Utils::statsCarrito(); ?>
-    <h3>Precio Total: $<?=$stats['total']?></h3>
-    <a href="<?=BASE_URL?>pedido/index" class="button button-pedido">Hacer pedido</a>
-</div>
+<?php else : ?>
+    <p>El carrito está vacio, añade algun producto</p>
+<?php endif; ?>
