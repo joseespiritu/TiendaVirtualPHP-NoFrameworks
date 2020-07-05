@@ -29,7 +29,7 @@
             <?php if(isset($_SESSION['admin'])): ?>
                 <li><a href="<?=BASE_URL?>categoria/index">Gestionar Categorias</a></li>
                 <li><a href="<?=BASE_URL?>producto/gestion">Gestionar Productos</a></li>
-                <li><a href="#">Gestionar Pedidos</a></li>
+                <li><a href="<?=BASE_URL?>pedido/gestion">Gestionar Pedidos</a></li>
             <?php endif; ?>
 
             <?php if(isset($_SESSION['identity'])): ?>

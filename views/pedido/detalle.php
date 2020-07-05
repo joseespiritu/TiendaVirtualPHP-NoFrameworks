@@ -21,6 +21,7 @@
     Provincia: <?= $pedido->provincia ?> <br />
     Ciudad: <?= $pedido->localidad ?> <br />
     Direccion: <?= $pedido->direccion ?> <br />
+    <br/>
 
     <h3>Datos del pedido:</h3>
     Estado: <?=Utils::showStatus($pedido->estado)?> <br/>
